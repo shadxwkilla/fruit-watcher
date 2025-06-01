@@ -4,8 +4,8 @@ import os
 
 app = Flask(__name__)
 
-TELEGRAM_TOKEN = os.environ.get("6223928694:AAHlHo3LxZYAv4d28iOjXrqph2buW_aiA1o")
-CHAT_ID = os.environ.get("6159204744")
+TELEGRAM_TOKEN = os.environ.get("TELEGRAM_TOKEN")
+CHAT_ID = os.environ.get("CHAT_ID")
 
 @app.route("/")
 def index():
@@ -16,8 +16,14 @@ def notify():
     data = request.get_json()
     text = data.get("text", "🍍 Фрукт заспавнился!")
 
-    requests.post(
+    response = requests.post(
         f"https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendMessage",
         data={"chat_id": CHAT_ID, "text": text}
     )
+    
+    print("Telegram response:", response.status_code, response.text)  # Для логов Render
+
+    if response.status_code != 200:
+        return f"Error sending message: {response.text}", 500
+
     return "Notification sent!", 200
