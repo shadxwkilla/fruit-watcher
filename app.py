@@ -4,7 +4,7 @@ import os
 
 app = Flask(__name__)
 
-TELEGRAM_TOKEN = os.environ.get("TELEGRAM_TOKEN")
+TELEGRAM_TOKEN = os.environ.get("6223928694:AAHlHo3LxZYAv4d28iOjXrqph2buW_aiA1o")
 CHAT_ID = os.environ.get("6159204744")
 
 @app.route("/")
