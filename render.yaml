@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: fruit-watcher
+    runtime: python
+    buildCommand: ""
+    startCommand: gunicorn app:app
+    envVars:
+      - key: TELEGRAM_TOKEN
+        sync: false
+      - key: CHAT_ID
+        sync: false
